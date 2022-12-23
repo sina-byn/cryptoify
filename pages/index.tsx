@@ -2,6 +2,9 @@ import { useState } from 'react';
 import Head from 'next/head';
 import type { NextPage } from 'next';
 
+// * hooks
+import useAxios from '../hooks/useAxios';
+
 // * components
 import Table from '../components/Table';
 import Select from '../components/Select';
@@ -13,12 +16,39 @@ import tableCols from '../configs/CoinsTable.config';
 import type { Coin } from '../interfaces/interfaces';
 
 interface HomePageProps {
-  coinsData: Coin[];
+  coinsData: CoinsData;
 }
 
+type CoinsData = Coin[];
+
 const Home: NextPage<HomePageProps> = ({ coinsData }) => {
+  const [coins, setCoins] = useState<CoinsData>(coinsData);
+  const [query, setQuery] = useState<string>('');
   const [currency, setCurrency] = useState<string>('usd');
   const [perPage, setPerPage] = useState<string>('100');
+  const filteredCoins = coins.filter(({ symbol, name }) => {
+    const searchQuery = query.toLowerCase();
+    return (
+      symbol.toLowerCase().includes(searchQuery) ||
+      name.toLowerCase().includes(searchQuery)
+    );
+  });
+
+  const axios = useAxios<CoinsData>();
+
+  const { loading, error } = axios.get(
+    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=${perPage}&page=1&sparkline=false`,
+    {
+      ssr: true,
+      setState: setCoins,
+      dependencies: [currency, perPage],
+      revalidation: { revalidate: true },
+    }
+  );
+
+  if (error) {
+    return <div>Error</div>;
+  }
 
   return (
     <>
@@ -48,7 +78,8 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
         </div>
         <Table<Coin>
           cols={tableCols}
-          rows={coinsData}
+          rows={filteredCoins}
+          loading={loading}
           className='md:px-16 lg:px-32'
           headClassName='top-20'
         />

@@ -1,3 +1,6 @@
+// * components
+import Spinner from './Spinner';
+
 // * interfaces
 interface TableCol {
   key?: string;
@@ -11,10 +14,11 @@ interface TableProps<T> {
   rows: T[];
   className?: string;
   headClassName?: string;
+  loading: boolean;
 }
 
 const Table = <T extends object>(props: TableProps<T>) => {
-  const { cols, rows, className = '', headClassName = '' } = props;
+  const { cols, rows, className = '', headClassName = '', loading } = props;
   const setCell = (rowData: T, col: TableCol) => {
     if (col.cellElem) return col.cellElem(rowData);
 
@@ -37,7 +41,9 @@ const Table = <T extends object>(props: TableProps<T>) => {
       className={`table-wrap w-full overflow-x-auto md:overflow-visible mx-auto mb-10 md:mb-0 ${className}`}
     >
       <table className='w-full text-sm'>
-        <thead className={`sticky z-10 text-right bg-white shadow-md ${headClassName}`}>
+        <thead
+          className={`sticky z-10 text-right bg-white shadow-md ${headClassName}`}
+        >
           <tr className='border-b border-gray-500'>
             {cols.map((col, idx) => (
               <th key={idx} className={`${col.className} pt-4 pb-2 px-3`}>
@@ -47,7 +53,8 @@ const Table = <T extends object>(props: TableProps<T>) => {
           </tr>
         </thead>
         <tbody className='text-right'>
-          {rows.length > 0 &&
+          {!loading &&
+            rows.length > 0 &&
             rows.map((row, idx) => (
               <tr
                 key={idx}
@@ -64,6 +71,7 @@ const Table = <T extends object>(props: TableProps<T>) => {
             ))}
         </tbody>
       </table>
+      {loading && <Spinner className='w-16 mx-auto mt-20' />}
     </div>
   );
 };
