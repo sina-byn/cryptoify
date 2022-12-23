@@ -77,7 +77,7 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
           />
         </div>
         <Table<Coin>
-          cols={tableCols}
+          cols={tableCols(currency)}
           rows={filteredCoins}
           loading={loading}
           className='md:px-16 lg:px-32'

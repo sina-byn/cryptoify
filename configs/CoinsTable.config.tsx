@@ -1,9 +1,12 @@
 import Link from 'next/link';
 
+// * utils
+import { getCurrencySign } from '../utils/functions';
+
 // * intefaces
 import type { Coin } from '../interfaces/interfaces';
 
-const tableCols = [
+const tableCols = (currency: string) => [
   { key: 'market_cap_rank', title: '#', className: 'text-left pr-0 md:pr-5' },
   {
     title: 'Coin',
@@ -19,7 +22,12 @@ const tableCols = [
   {
     key: 'current_price',
     title: 'Price',
-    cellElem: ({ current_price }: Coin) => <>${current_price}</>,
+    cellElem: ({ current_price }: Coin) => (
+      <>
+        {getCurrencySign(currency)}
+        {current_price}
+      </>
+    ),
   },
   {
     key: 'price_change_percentage_24h',
@@ -38,7 +46,10 @@ const tableCols = [
     key: 'market_cap',
     title: 'Mkt Cap',
     cellElem: ({ market_cap }: Coin) => (
-      <>${market_cap && market_cap.toLocaleString()}</>
+      <>
+        {getCurrencySign(currency)}
+        {market_cap && market_cap.toLocaleString()}
+      </>
     ),
   },
   {
