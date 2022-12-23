@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import type { NextPage } from 'next';
 
 // * components
 import Table from '../components/Table';
+import Select from '../components/Select';
 
 // * configs
 import tableCols from '../configs/CoinsTable.config';
@@ -15,6 +17,9 @@ interface HomePageProps {
 }
 
 const Home: NextPage<HomePageProps> = ({ coinsData }) => {
+  const [currency, setCurrency] = useState<string>('usd');
+  const [perPage, setPerPage] = useState<string>('100');
+
   return (
     <>
       <Head>
@@ -27,7 +32,25 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='app-container'>
-        <Table<Coin> cols={tableCols} rows={coinsData} className='md:px-16 lg:px-32' />
+        <div className='table-controls flex items-center gap-x-6 py-6 px-4 md:px-16 lg:px-32'>
+          <Select
+            label='currency'
+            value={currency}
+            setValue={setCurrency}
+            options={['usd', 'eur', 'gbp']}
+          />
+          <Select
+            label='per-page'
+            value={perPage}
+            setValue={setPerPage}
+            options={['50', '100', '150', '200', '250']}
+          />
+        </div>
+        <Table<Coin>
+          cols={tableCols}
+          rows={coinsData}
+          className='md:px-16 lg:px-32'
+        />
       </main>
     </>
   );
