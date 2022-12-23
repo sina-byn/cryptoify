@@ -1,6 +1,20 @@
 import Head from 'next/head';
+import type { NextPage } from 'next';
 
-export default function Home() {
+// * components
+import Table from '../components/Table';
+
+// * configs
+import tableCols from '../configs/CoinsTable.config';
+
+// * interfaces
+import type { Coin } from '../interfaces/interfaces';
+
+interface HomePageProps {
+  coinsData: Coin[];
+}
+
+const Home: NextPage<HomePageProps> = ({ coinsData }) => {
   return (
     <>
       <Head>
@@ -12,7 +26,24 @@ export default function Home() {
         />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <main className='app-container'>Cryptoify</main>
+      <main className='app-container'>
+        <Table<Coin> cols={tableCols} rows={coinsData} className='md:px-16 lg:px-32' />
+      </main>
     </>
   );
+};
+
+export async function getStaticProps() {
+  const res = await fetch(
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false'
+  );
+  const data = await res.json();
+
+  return {
+    props: {
+      coinsData: data,
+    },
+  };
 }
+
+export default Home;
