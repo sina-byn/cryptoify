@@ -8,6 +8,7 @@ import useAxios from '../hooks/useAxios';
 // * components
 import Table from '../components/Table';
 import Select from '../components/Select';
+import SearchBox from '../components/SearchBox';
 
 // * configs
 import tableCols from '../configs/CoinsTable.config';
@@ -62,19 +63,26 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='app-container'>
-        <div className='table-controls flex items-center gap-x-6 sticky top-0 z-20 bg-white py-6 px-4 md:px-16 lg:px-32'>
-          <Select
-            label='currency'
-            value={currency}
-            setValue={setCurrency}
-            options={['usd', 'eur', 'gbp']}
+        <div className='table-controls grid grid-cols-2 gap-x-6 sticky top-0 z-20 bg-white py-6 px-4 md:px-16 lg:px-32'>
+          <SearchBox
+            value={query}
+            setValue={setQuery}
+            placeholder='symbol, name'
           />
-          <Select
-            label='per-page'
-            value={perPage}
-            setValue={setPerPage}
-            options={['50', '100', '150', '200', '250']}
-          />
+          <div className='controls-right flex justify-end gap-6'>
+            <Select
+              label='currency'
+              value={currency}
+              setValue={setCurrency}
+              options={['usd', 'eur', 'gbp']}
+            />
+            <Select
+              label='per-page'
+              value={perPage}
+              setValue={setPerPage}
+              options={['50', '100', '150', '200', '250']}
+            />
+          </div>
         </div>
         <Table<Coin>
           cols={tableCols(currency)}
