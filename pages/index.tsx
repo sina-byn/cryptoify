@@ -32,7 +32,7 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='app-container'>
-        <div className='table-controls flex items-center gap-x-6 py-6 px-4 md:px-16 lg:px-32'>
+        <div className='table-controls flex items-center gap-x-6 sticky top-0 z-20 bg-white py-6 px-4 md:px-16 lg:px-32'>
           <Select
             label='currency'
             value={currency}
@@ -50,6 +50,7 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
           cols={tableCols}
           rows={coinsData}
           className='md:px-16 lg:px-32'
+          headClassName='top-20'
         />
       </main>
     </>
