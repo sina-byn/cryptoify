@@ -10,7 +10,7 @@ import {
 import axios from 'axios';
 
 interface Options<T> {
-  setState: Dispatch<SetStateAction<T>>;
+  setState: Dispatch<SetStateAction<T>> | Function;
   dependencies?: DependencyList;
   ssr?: boolean;
   revalidation?: { revalidate: boolean; interval?: number };

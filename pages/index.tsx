@@ -15,6 +15,7 @@ import tableCols from '../configs/CoinsTable.config';
 
 // * interfaces
 import type { Coin } from '../interfaces/interfaces';
+import Pagination from '../components/Pagination';
 
 interface HomePageProps {
   coinsData: CoinsData;
@@ -26,7 +27,8 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
   const [coins, setCoins] = useState<CoinsData>(coinsData);
   const [query, setQuery] = useState<string>('');
   const [currency, setCurrency] = useState<string>('usd');
-  const [perPage, setPerPage] = useState<string>('100');
+  const [page, setPage] = useState<number>(1);
+  const [perPage, setPerPage] = useState<number>(100);
   const filteredCoins = coins.filter(({ symbol, name }) => {
     const searchQuery = query.toLowerCase();
     return (
@@ -63,26 +65,27 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='app-container'>
-        <div className='table-controls grid grid-cols-2 gap-x-6 sticky top-0 z-20 bg-white py-6 px-4 md:px-16 lg:px-32'>
+        <div className='table-controls grid grid-cols-2 grid-rows-2 gap-x-6 gap-y-3 sticky top-0 z-20 bg-white py-6 px-4 md:px-16 lg:px-32'>
           <SearchBox
             value={query}
             setValue={setQuery}
             placeholder='symbol, name'
           />
           <div className='controls-right flex justify-end gap-6'>
-            <Select
+            <Select<string>
               label='currency'
               value={currency}
               setValue={setCurrency}
               options={['usd', 'eur', 'gbp']}
             />
-            <Select
+            <Select<number>
               label='per-page'
               value={perPage}
               setValue={setPerPage}
               options={['50', '100', '150', '200', '250']}
             />
           </div>
+          <Pagination page={page} perPage={perPage} setPage={setPage} />
         </div>
         <Table<Coin>
           cols={tableCols(currency)}

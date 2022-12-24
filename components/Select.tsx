@@ -8,14 +8,19 @@ import useClickoutside from '../hooks/useClickOutside';
 import Button from './Button';
 
 // * interfaces
-interface SelectProps {
+interface SelectProps<T> {
   label: string;
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  value: T;
+  setValue: Dispatch<SetStateAction<T>>;
   options: string[];
 }
 
-const Select: FC<SelectProps> = ({ label, value, setValue, options }) => {
+const Select = <T extends number | string>({
+  label,
+  value,
+  setValue,
+  options,
+}: SelectProps<T>) => {
   const selectRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded, toggler] = useToggle();
   useClickoutside<HTMLDivElement>(selectRef, toggler);
@@ -23,8 +28,11 @@ const Select: FC<SelectProps> = ({ label, value, setValue, options }) => {
   const expandToggler = () => setExpanded(prev => !prev);
   const selectHandler = (e: MouseEvent) => {
     const option = e.target as HTMLButtonElement;
-    const value = option.textContent!;
-    setValue(value);
+    const optionValue =
+      typeof value === 'string'
+        ? option.textContent
+        : Number(option.textContent);
+    setValue(optionValue as T);
     toggler(false);
   };
 
