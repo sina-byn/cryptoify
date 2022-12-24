@@ -42,7 +42,7 @@ const Table = <T extends object>(props: TableProps<T>) => {
     >
       <table className='w-full text-sm'>
         <thead
-          className={`sticky z-10 text-right bg-white shadow-md ${headClassName}`}
+          className={`md:sticky z-10 text-right bg-white shadow-md ${headClassName}`}
         >
           <tr className='border-b border-gray-500'>
             {cols.map((col, idx) => (

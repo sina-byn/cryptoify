@@ -15,7 +15,7 @@ const tableCols = (currency: string) => [
       <>
         {image && <img src={image} alt={name} className='w-10' />}
         <span className='font-bold'>{name}</span>
-        <sup className='text-gray-400 text-sm'>{symbol}</sup>
+        <sup className='text-gray-400 text-sm pr-10 sm:pr-0'>{symbol}</sup>
       </>
     ),
   },

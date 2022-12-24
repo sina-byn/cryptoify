@@ -38,7 +38,7 @@ const Select = <T extends number | string>({
 
   return (
     <div className='select-wrapper flex items-center gap-1'>
-      <span className='select-label'>{label} :</span>
+      <span className='select-label text-sm'>{label} :</span>
       <div
         ref={selectRef}
         className='select flex flex-col w-20 h-8 relative text-sm border border-gray-400/50 rounded-lg'

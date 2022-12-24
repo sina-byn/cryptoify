@@ -14,7 +14,7 @@ interface PaginationProps {
 
 const Pagination: FC<PaginationProps> = ({ page, perPage, setPage }) => {
   const axios = useAxios<Partial<Coin>[]>();
-  const [lastPage, setLastPage] = useState<number>(129);
+  const [lastPage, setLastPage] = useState<number>(0);
 
   const pageChangeHandler = (e: MouseEvent) => {
     const targetBtn = e.target as HTMLElement;
@@ -25,9 +25,9 @@ const Pagination: FC<PaginationProps> = ({ page, perPage, setPage }) => {
   const incrementHandler = () => setPage(prev => ++prev);
   const decrementHandler = () => setPage(prev => --prev);
 
-  // const { error } = axios.get('https://api.coingecko.com/api/v3/coins/list', {
-  //   setState: data => setLastPage(Math.ceil(data.length / Number(perPage))),
-  // });
+  const { error } = axios.get('https://api.coingecko.com/api/v3/coins/list', {
+    setState: data => setLastPage(Math.ceil(data.length / Number(perPage))),
+  });
 
   const generatePageNums = (currPage: number) => {
     const nums: number[] = [];
@@ -61,10 +61,10 @@ const Pagination: FC<PaginationProps> = ({ page, perPage, setPage }) => {
     return nums;
   };
 
-  // if (error) return null;
+  if (error) return null;
 
   return (
-    <div className='pagination flex items-center justify-end col-start-2 h-[1.9rem]'>
+    <div className='pagination flex items-center md:justify-end col-start-2 h-[1.9rem]'>
       {page > 3 ? (
         <Button
           onClick={decrementHandler}

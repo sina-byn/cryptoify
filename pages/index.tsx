@@ -65,13 +65,13 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='app-container'>
-        <div className='table-controls grid grid-cols-2 grid-rows-2 gap-x-6 gap-y-3 sticky top-0 z-20 bg-white py-6 px-4 md:px-16 lg:px-32'>
+        <div className='table-controls flex flex-col md:grid grid-cols-2 grid-rows-2 gap-y-3 sticky top-0 z-20 bg-white py-4 md:py-6 px-4 md:px-16 lg:px-32'>
           <SearchBox
             value={query}
             setValue={setQuery}
             placeholder='symbol, name'
           />
-          <div className='controls-right flex justify-end gap-6'>
+          <div className='controls-right flex flex-col sm:flex-row md:justify-end gap-y-3 gap-x-6'>
             <Select<string>
               label='currency'
               value={currency}
@@ -92,7 +92,7 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
           rows={filteredCoins}
           loading={loading}
           className='md:px-16 lg:px-32'
-          headClassName='top-20'
+          headClassName='top-[7rem]'
         />
       </main>
     </>
