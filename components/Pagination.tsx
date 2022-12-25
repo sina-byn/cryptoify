@@ -61,7 +61,7 @@ const Pagination: FC<PaginationProps> = ({ page, perPage, setPage }) => {
     return nums;
   };
 
-  if (error) return null;
+  if (error || !lastPage) return null;
 
   return (
     <div className='pagination flex items-center md:justify-end col-start-2 h-[1.9rem]'>
