@@ -77,6 +77,7 @@ const Chart: FC<ChartProps> = ({ coinId }) => {
         });
       },
       dependencies: [coinId],
+      revalidation: { revalidate: true }
     }
   );
 
