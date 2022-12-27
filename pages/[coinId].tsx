@@ -27,7 +27,7 @@ const Coin: NextPage = () => {
   const { loading, error } = axios.get(
     `https://api.coingecko.com/api/v3/coins/${coinId}`,
     {
-      setState: data => setCoinData(data),
+      setState: (data: SingleCoinData) => setCoinData(data),
       dependencies: [coinId],
     }
   );
