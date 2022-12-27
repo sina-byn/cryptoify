@@ -14,6 +14,11 @@ interface SingleCoinData {
   symbol: string;
   name: string;
   market_data: object;
+  image: {
+    thumb: string;
+    large: string;
+    small: string;
+  };
 }
 
 export type { Coin, SingleCoinData };

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-*  {
+* {
   margin: 0;
   padding: 0;
   font: inherit;
@@ -14,3 +14,10 @@ body {
   overflow-x: hidden;
 }
 
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  img[loading='lazy'] {
+    -webkit-clip-path: inset(0.6px);
+            clip-path: inset(0.6px);
+  }
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdsb2JhbHMuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxvQkFBb0I7QUFDcEIsbUJBQW1COztBQUVuQjtFQUNFLFNBQVM7RUFDVCxVQUFVO0VBQ1YsYUFBYTtFQUNiLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0U7SUFDRSwrQkFBdUI7WUFBdkIsdUJBQXVCO0VBQ3pCO0FBQ0YiLCJmaWxlIjoiZ2xvYmFscy5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAdGFpbHdpbmQgYmFzZTtcclxuQHRhaWx3aW5kIGNvbXBvbmVudHM7XHJcbkB0YWlsd2luZCB1dGlsaXRpZXM7XHJcblxyXG4qIHtcclxuICBtYXJnaW46IDA7XHJcbiAgcGFkZGluZzogMDtcclxuICBmb250OiBpbmhlcml0O1xyXG4gIGNvbG9yOiBpbmhlcml0O1xyXG59XHJcblxyXG5ib2R5IHtcclxuICBtaW4taGVpZ2h0OiAxMDB2aDtcclxuICBvdmVyZmxvdy14OiBoaWRkZW47XHJcbn1cclxuXHJcbkBzdXBwb3J0cyAoZm9udDogLWFwcGxlLXN5c3RlbS1ib2R5KSBhbmQgKC13ZWJraXQtYXBwZWFyYW5jZTogbm9uZSkge1xyXG4gIGltZ1tsb2FkaW5nPSdsYXp5J10ge1xyXG4gICAgY2xpcC1wYXRoOiBpbnNldCgwLjZweCk7XHJcbiAgfVxyXG59Il19 */
