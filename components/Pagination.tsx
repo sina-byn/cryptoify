@@ -27,6 +27,7 @@ const Pagination: FC<PaginationProps> = ({ page, perPage, setPage }) => {
 
   const { error } = axios.get('https://api.coingecko.com/api/v3/coins/list', {
     setState: data => setLastPage(Math.ceil(data.length / Number(perPage))),
+    dependencies: [perPage]
   });
 
   const generatePageNums = (currPage: number) => {
