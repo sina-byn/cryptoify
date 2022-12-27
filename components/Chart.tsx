@@ -77,7 +77,7 @@ const Chart: FC<ChartProps> = ({ coinId }) => {
         });
       },
       dependencies: [coinId],
-      revalidation: { revalidate: true }
+      revalidation: { revalidate: true },
     }
   );
 
@@ -113,6 +113,7 @@ const Chart: FC<ChartProps> = ({ coinId }) => {
       <div className='timeframe-controls flex items-center justify-center gap-6 pt-3'>
         {timeframes.map(range => (
           <Button
+            key={range}
             data-timeframe={range}
             onClick={timeFrameChangeHandler}
             className={`
