@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 // * utils
 import { getCurrencySign } from '../utils/functions';
@@ -13,7 +14,15 @@ const tableCols = (currency: string) => [
     className: 'flex items-center gap-2 text-left pl-0',
     cellElem: ({ name, symbol, image }: Coin) => (
       <>
-        {image && <img src={image} alt={name} className='w-10' />}
+        {image && (
+          <Image
+            alt={name}
+            src={image}
+            width={50}
+            height={50}
+            className='w-10'
+          />
+        )}
         <span className='font-bold'>{name}</span>
         <sup className='text-gray-400 text-sm pr-10 sm:pr-0'>{symbol}</sup>
       </>
