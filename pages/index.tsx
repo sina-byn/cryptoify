@@ -57,12 +57,6 @@ const Home: NextPage<HomePageProps> = ({ coinsData }) => {
     <>
       <Head>
         <title>Cryptoify</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <meta
-          name='description'
-          content='a web-app for you to keep track of prices in the crypto world'
-        />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
       <main className='app-container'>
         <div className='table-controls flex flex-col md:grid grid-cols-2 grid-rows-2 gap-y-3 sticky top-0 z-20 bg-white py-4 md:py-6 px-4 md:px-16 lg:px-32'>
