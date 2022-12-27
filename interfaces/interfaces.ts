@@ -10,4 +10,10 @@ interface Coin {
   price_change_percentage_24h: number;
 }
 
-export type { Coin };
+interface SingleCoinData {
+  symbol: string;
+  name: string;
+  market_data: object;
+}
+
+export type { Coin, SingleCoinData };
